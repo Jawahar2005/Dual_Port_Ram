@@ -118,13 +118,20 @@ class ram_sb;
    endtask: check
 
 
-   virtual function void report();
+  virtual function void report();
 
-      $display(" ------------------------ SCOREBOARD REPORT ----------------------- ");
-      $display(" %0d Read Data Generated, %0d Read Data Received, %0d Read Data Verified",
-                rm_data_count, mon_data_count, data_verified);
-      $display(" ------------------------------------------------------------------ ");
+    $display(" ------------------------ SCOREBOARD REPORT ----------------------- ");
+    $display(" %0d Read Data Generated, %0d Read Data Received, %0d Read Data Verified",
+             rm_data_count, mon_data_count, data_verified);
+    $display(" ------------------------------------------------------------------ ");
 
-   endfunction: report
+    $display(" RD Address Coverage = %0.2f %%", mem_coverage.RD_ADD.get_coverage());
+    $display(" DATA Coverage       = %0.2f %%", mem_coverage.DATA.get_coverage());
+    $display(" READ Coverage       = %0.2f %%", mem_coverage.RD.get_coverage());
+    $display(" CROSS Coverage      = %0.2f %%", mem_coverage.READxADD.get_coverage());
+
+    $display(" ------------------------------------------------------------------ ");
+
+  endfunction
 
 endclass: ram_sb
